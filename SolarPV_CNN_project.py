@@ -79,7 +79,7 @@ def build_model():
 def train_model(model, train_data, val_data):
     history = model.fit(train_data, epochs=10, validation_data=val_data)
     model.save("solar_fault_classifier.h5")
-    print("✅ Model saved as solar_fault_classifier.h5")
+    print("Model saved as solar_fault_classifier.h5")
 
 # --- STEP 5: Random Mixed Images from Clean + Defect Folders ---
 def get_random_mixed_images(n_images=6):
@@ -101,7 +101,7 @@ def get_random_mixed_images(n_images=6):
                             if f.lower().endswith(('.jpg', '.png'))]
 
     if not image_paths:
-        print("❌ No images found in Clean or Defect folders.")
+        print(" No images found in Clean or Defect folders.")
         return []
 
     return random.sample(image_paths, min(n_images, len(image_paths)))
@@ -135,20 +135,20 @@ if __name__ == "__main__":
     print("🚀 Starting Solar PV Fault Detection")
 
     if not os.path.exists(ORIGINAL_DATASET_DIR):
-        print(f"❌ Dataset folder '{ORIGINAL_DATASET_DIR}' not found!")
+        print(f"Dataset folder '{ORIGINAL_DATASET_DIR}' not found!")
         exit()
 
     if os.path.exists(TRAIN_DIR) and os.path.exists(VAL_DIR):
-        print("📁 Dataset already prepared. Skipping data prep.")
+        print(" Dataset already prepared. Skipping data prep.")
     else:
         print("🛠️ Preparing dataset...")
         prepare_folders()
         prepare_dataset()
 
-    print("🖼️ Loading image data...")
+    print(" Loading image data...")
     train_data, val_data = load_data()
 
-    print("🧠 Building and training model...")
+    print("Building and training model...")
     model = build_model()
     train_model(model, train_data, val_data)
 
@@ -156,3 +156,4 @@ if __name__ == "__main__":
     sample_paths = get_random_mixed_images(n_images=6)  # You can change the number
     if sample_paths:
         predict_from_filepaths(sample_paths)
+
